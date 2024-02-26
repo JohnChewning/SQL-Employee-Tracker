@@ -79,8 +79,10 @@ const query = util.promisify(db.query).bind(db);
 
 async function viewAllDepartments() {
     try {
-        const [rows] = await query('SELECT * FROM department');
-        console.table(rows);
+        const rows = await query('SELECT * FROM department');
+        rows.forEach((department) => {
+            console.log(`ID: ${department.id} | Name: ${department.name}`);
+        });
     } catch (error) {
         console.error('Error viewing departments:', error.message);
     }
@@ -88,21 +90,27 @@ async function viewAllDepartments() {
 
 async function viewAllRoles() {
     try {
-        const [rows] = await query('SELECT * FROM role');
-        console.table(rows);
+        const rows = await query('SELECT id, title, salary, department_id FROM role');
+        rows.forEach((role) => {
+            console.log(`ID: ${role.id} | Title: ${role.title} | Salary: ${role.salary} | Department ID: ${role.department_id}`);
+        });
     } catch (error) {
         console.error('Error viewing roles:', error.message);
     }
 }
 
+
 async function viewAllEmployees() {
     try {
-        const [rows] = await query('SELECT * FROM employee');
-        console.table(rows);
+        const rows = await query('SELECT id, first_name, last_name, role_id, manager_id FROM employee');
+        rows.forEach((employee) => {
+            console.log(`ID: ${employee.id} | Name: ${employee.first_name} ${employee.last_name} | Role ID: ${employee.role_id} | Manager ID: ${employee.manager_id}`);
+        });
     } catch (error) {
         console.error('Error viewing employees:', error.message);
     }
 }
+
 
 async function addDepartment() {
     const departmentPrompt = [
