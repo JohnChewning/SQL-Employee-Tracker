@@ -31,9 +31,9 @@ npm start
 
 Follow the on-screen prompts to interact with the application.
 
-## Contribution
+## Demo
 
-N/A
+<video controls src="employeetracker.mp4" title="Title"></video>
 
 ## Test
 
